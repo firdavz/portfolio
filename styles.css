@@ -1,0 +1,677 @@
+/* ============================================================
+   THEME — change colours and fonts here.
+   ============================================================ */
+:root {
+  /* Colours: "Deep Space Violet" */
+  --color-bg: #0b1024;            /* page background (deep navy) */
+  --color-surface: #111734;       /* card background */
+  --color-surface-hover: #151c3f; /* card background on hover */
+  --color-border: #20294f;        /* card borders, dividers */
+  --color-border-hover: #333f78;
+  --color-text: #eceafb;          /* main text (off-white) */
+  --color-text-muted: #9ca1c6;    /* secondary text */
+  --color-text-faint: #4b5280;    /* decorative lines only (low contrast) */
+  --color-accent: #a78bfa;        /* violet accent */
+  --color-accent-soft: rgba(167, 139, 250, 0.12); /* accent at 12% — update with --color-accent */
+  --color-accent-ink: #140b2e;    /* text on top of the accent colour */
+
+  /* Background effects */
+  --glow-1: rgba(150, 110, 250, 0.26);     /* violet glow, top left */
+  --glow-2: rgba(34, 211, 238, 0.09);      /* cyan glow, bottom right */
+  --grid-dot: rgba(196, 181, 253, 0.15);   /* dot grid colour */
+  --color-accent-glow: rgba(167, 139, 250, 0.75); /* neon glow on nav line, button, markers */
+  --cursor-glow: rgba(240, 238, 255, 0.05); /* light that follows the mouse */
+
+  /* Fonts */
+  --font-heading: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Sizing */
+  --radius: 10px;
+  --radius-sm: 6px;
+  --gutter: 1.5rem;
+  --sidebar-breakpoint: 1024px; /* reference only — media queries below use 1024px */
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background effects: two soft static glows, then a faint dot grid that fades
+   out from the top-left corner. Both are fixed layers, so scrolling costs nothing. */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+body::before {
+  z-index: -2;
+  background:
+    radial-gradient(64rem 44rem at 0% 0%, var(--glow-1), transparent 70%),
+    radial-gradient(50rem 36rem at 105% 110%, var(--glow-2), transparent 65%);
+}
+
+body::after {
+  z-index: -1;
+  background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 65% at 0% 0%, #000 25%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 65% at 0% 0%, #000 25%, transparent 75%);
+}
+
+/* Soft light that follows the mouse (created by main.js on mouse devices only).
+   It moves with transform, so the browser never has to repaint the page. */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 700px;
+  height: 700px;
+  margin: -350px 0 0 -350px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--cursor-glow), transparent);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 400ms ease;
+  will-change: transform;
+}
+
+.cursor-glow.is-visible {
+  opacity: 1;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  line-height: 1.2;
+}
+
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--color-text);
+  text-decoration-color: var(--color-accent);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+main:focus {
+  outline: none;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+/* Hidden visually, still read by screen readers. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   Skip link
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/* ============================================================
+   Layout — mobile first (single column)
+   ============================================================ */
+.layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.sidebar {
+  padding: 4rem 0 2rem;
+}
+
+main {
+  padding-bottom: 3rem;
+}
+
+/* ============================================================
+   Sidebar / header
+   ============================================================ */
+.intro-name {
+  font-size: clamp(2.5rem, 7vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+/* Name fades from the text colour into the accent. */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .intro-name {
+    width: fit-content; /* gradient spans the name, not the whole column */
+    background: linear-gradient(100deg, var(--color-text) 35%, var(--color-accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.intro-headline {
+  margin-top: 0.75rem;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.intro-tagline {
+  max-width: 22rem;
+  margin-top: 1rem;
+  white-space: pre-line; /* a "\n" in the tagline in data.js starts a new line */
+}
+
+/* Section nav: hidden on small screens, where sticky section titles take over. */
+.section-nav {
+  display: none;
+}
+
+.sidebar-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 1.5rem;
+  margin-top: 2rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.1rem;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  color: var(--color-accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 0 20px -6px var(--color-accent-glow);
+  transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+}
+
+.button:hover {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  box-shadow: 0 0 26px -4px var(--color-accent-glow);
+}
+
+.button-icon {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.socials {
+  display: flex;
+  gap: 1rem;
+}
+
+.socials a {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--color-text-muted);
+  transition: color 150ms ease, filter 150ms ease;
+}
+
+.socials a:hover {
+  color: var(--color-accent);
+  filter: drop-shadow(0 0 6px var(--color-accent-glow));
+}
+
+.socials svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+/* ============================================================
+   Sections
+   ============================================================ */
+.section {
+  padding-top: 1rem;
+  margin-bottom: 5rem;
+  scroll-margin-top: 1rem;
+}
+
+/* On mobile the title sticks to the top while you scroll its section. */
+.section-title {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  margin: 0 calc(var(--gutter) * -1) 1.5rem;
+  padding: 1rem var(--gutter);
+  background: var(--color-bg);
+  background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--color-text);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.section-title::before {
+  content: "";
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.75rem;
+  border-radius: 2px;
+  background: var(--color-accent);
+  box-shadow: 0 0 8px var(--color-accent-glow);
+  vertical-align: 0.1em;
+}
+
+.about-text p + p {
+  margin-top: 1.1rem;
+}
+
+/* ============================================================
+   Cards (hackathons + projects)
+   ============================================================ */
+.card-list {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.card {
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  transition: border-color 200ms ease, background-color 200ms ease, transform 200ms ease;
+}
+
+.card:hover {
+  border-color: var(--color-border-hover);
+  background: var(--color-surface-hover);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Cards with a thumbnail get two columns on wider screens. */
+@media (min-width: 600px) {
+  .card.has-media {
+    grid-template-columns: 9rem minmax(0, 1fr);
+  }
+}
+
+.card-media img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.card-body {
+  display: grid;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.card-meta {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.card-summary {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.card-role strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.badge {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--color-accent-soft);
+  border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  border-radius: 999px;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.badge svg {
+  width: 0.95em;
+  height: 0.95em;
+  flex: none;
+}
+
+.metrics {
+  color: var(--color-accent);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tags li {
+  padding: 0.2rem 0.65rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.card-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  text-decoration: none;
+}
+
+.card-links a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+}
+
+.link-arrow {
+  color: var(--color-accent);
+}
+
+.empty-note {
+  font-style: italic;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer {
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.8rem;
+}
+
+.noscript {
+  padding: 1rem var(--gutter);
+  text-align: center;
+}
+
+/* ============================================================
+   Desktop — two columns, sticky sidebar (1024px and wider)
+   ============================================================ */
+@media (min-width: 1024px) {
+  :root {
+    /* Top spacing shrinks on shorter screens so the left column always fits. */
+    --desktop-top: clamp(2.5rem, 11vh, 6rem);
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: 5rem;
+    padding: 0 3rem;
+  }
+
+  /* The left column is pinned to the screen and never scrolls.
+     Only the page (right column) scrolls. */
+  .sidebar {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    height: 100dvh;
+    padding: var(--desktop-top) 0 clamp(2rem, 7vh, 4rem);
+  }
+
+  main {
+    padding: var(--desktop-top) 0 4rem;
+  }
+
+  .section {
+    padding-top: 0;
+    margin-bottom: 7rem;
+    scroll-margin-top: var(--desktop-top);
+  }
+
+  /* Titles are a normal heading on desktop; the sidebar nav shows position. */
+  .section-title {
+    position: static;
+    margin: 0 0 1.75rem;
+    padding: 0;
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .section-nav {
+    display: block;
+    margin-top: clamp(1.5rem, 6vh, 3.5rem);
+  }
+
+  .section-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: clamp(0.35rem, 1.2vh, 0.55rem) 0;
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .nav-line {
+    display: block;
+    width: 1.75rem;
+    height: 1px;
+    background: var(--color-text-faint);
+    transition: width 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
+  }
+
+  .nav-text {
+    transition: color 200ms ease;
+  }
+
+  .section-nav a:hover .nav-line,
+  .section-nav a:focus-visible .nav-line,
+  .section-nav a.is-active .nav-line {
+    width: 3.75rem;
+    background: var(--color-accent);
+    box-shadow: 0 0 8px var(--color-accent-glow);
+  }
+
+  .section-nav a:hover .nav-text,
+  .section-nav a:focus-visible .nav-text,
+  .section-nav a.is-active .nav-text {
+    color: var(--color-text);
+  }
+
+  .sidebar-bottom {
+    margin-top: 1.5rem;
+  }
+}
+
+/* Short desktop windows (laptops with display scaling or browser zoom):
+   tighten the left column's spacing so it still fits and stays pinned. */
+@media (min-width: 1024px) and (max-height: 600px) {
+  :root {
+    --desktop-top: clamp(1.25rem, 8vh, 6rem);
+  }
+
+  .sidebar {
+    padding-bottom: clamp(1rem, 5vh, 4rem);
+  }
+
+  .intro-name {
+    font-size: clamp(2.25rem, 9vh, 3.5rem);
+    line-height: 1.1;
+  }
+
+  .intro-headline {
+    margin-top: 0.5rem;
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
+
+  .intro-tagline {
+    margin-top: 0.6rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .section-nav {
+    margin-top: clamp(0.75rem, 4vh, 3.5rem);
+  }
+
+  .section-nav a {
+    padding: 0.25rem 0;
+  }
+
+  .sidebar-bottom {
+    margin-top: 0.75rem;
+  }
+
+  .button {
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Last resort for extremely short windows, where the left column cannot fit
+   at all: let it scroll with the page so the CV button stays reachable. */
+@media (min-width: 1024px) and (max-height: 360px) {
+  .sidebar {
+    position: static;
+    height: auto;
+  }
+}
+
+/* ============================================================
+   Reduced motion — switch off all transitions
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}

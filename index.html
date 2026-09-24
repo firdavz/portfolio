@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- TODO: once deployed, replace YOUR-SITE-URL below with your real address,
+       e.g. https://your-username.github.io/ -->
+  <title>Firdavs · Finance student building fintech &amp; e-commerce software</title>
+  <meta name="description" content="Firdavs is a Finance student at the University of Greenwich who builds fintech and e-commerce software and competes in hackathons.">
+  <meta name="theme-color" content="#0b1024">
+  <link rel="canonical" href="https://YOUR-SITE-URL/">
+
+  <!-- Open Graph (LinkedIn / social link previews). og:image must be a full URL. -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Firdavs · Finance student building fintech &amp; e-commerce software">
+  <meta property="og:description" content="Hackathons, projects and CV. Seeking Summer 2027 software engineering internships in London.">
+  <meta property="og:url" content="https://YOUR-SITE-URL/">
+  <meta property="og:image" content="https://YOUR-SITE-URL/assets/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Firdavs, Finance student building fintech and e-commerce software">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="data.js" defer></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <div class="layout">
+    <header class="sidebar">
+      <div class="sidebar-top">
+        <h1 class="intro-name" id="intro-name">Firdavs</h1>
+        <p class="intro-headline" id="intro-headline"></p>
+        <p class="intro-tagline" id="intro-tagline"></p>
+
+        <nav class="section-nav" aria-label="Sections">
+          <ul>
+            <li><a href="#about" data-nav="about"><span class="nav-line" aria-hidden="true"></span><span class="nav-text">About</span></a></li>
+            <li><a href="#hackathons" data-nav="hackathons"><span class="nav-line" aria-hidden="true"></span><span class="nav-text">Hackathons</span></a></li>
+            <li><a href="#projects" data-nav="projects"><span class="nav-line" aria-hidden="true"></span><span class="nav-text">Projects</span></a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <a class="button" id="cv-link" href="assets/cv/cv.pdf" download>
+          <svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download CV
+        </a>
+        <ul class="socials" id="socials" aria-label="Social links"></ul>
+      </div>
+    </header>
+
+    <main id="content" tabindex="-1">
+      <section class="section" id="about" aria-labelledby="about-title">
+        <h2 class="section-title" id="about-title">About</h2>
+        <div class="about-text" id="about-body"></div>
+      </section>
+
+      <section class="section" id="hackathons" aria-labelledby="hackathons-title">
+        <h2 class="section-title" id="hackathons-title">Hackathons</h2>
+        <ol class="card-list" id="hackathon-list"></ol>
+      </section>
+
+      <section class="section" id="projects" aria-labelledby="projects-title">
+        <h2 class="section-title" id="projects-title">Projects</h2>
+        <ol class="card-list" id="project-list"></ol>
+      </section>
+
+      <footer class="site-footer" id="site-footer">
+        <p id="footer-text"></p>
+      </footer>
+    </main>
+  </div>
+
+  <noscript><p class="noscript">This site needs JavaScript enabled to show its content.</p></noscript>
+</body>
+</html>
