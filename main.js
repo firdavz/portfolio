@@ -107,6 +107,12 @@
     },
     trophy: {
       shapes: [{ d: "M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3" }]
+    },
+    play: {
+      shapes: [{ fill: true, d: "M7 4.5v15L19.5 12z" }]
+    },
+    close: {
+      shapes: [{ d: "M6 6l12 12M18 6 6 18" }]
     }
   };
 
@@ -116,7 +122,8 @@
     email: "Email"
   };
 
-  var HACKATHON_LINK_LABELS = { github: "GitHub", devpost: "Devpost", video: "Demo video" };
+  // links.video isn't listed here: it becomes the "Watch demo" button instead.
+  var HACKATHON_LINK_LABELS = { github: "GitHub", devpost: "Devpost" };
   var PROJECT_LINK_LABELS = { github: "GitHub", live: "Live demo", video: "Video" };
 
   /* ---------- Shared card pieces ---------- */
@@ -243,8 +250,137 @@
     });
   }
 
+  function hackathonMeta(h) {
+    return [h.organiser, h.date].filter(hasValue).join(" · ");
+  }
+
+  /* ---------- Hackathon photos & clips (pop-up gallery) ---------- */
+
+  var VIDEO_FILE = /\.(mp4|webm|mov)([?#]|$)/i;
+  var galleryDialog = null;
+
+  // Only gallery entries with a usable src.
+  function galleryItems(h) {
+    if (!Array.isArray(h.gallery)) return [];
+    return h.gallery.filter(function (item) {
+      return item && safeUrl(item.src);
+    });
+  }
+
+  function buildGalleryItem(item, context) {
+    var src = safeUrl(item.src);
+    var caption = hasValue(item.caption) ? item.caption : "";
+    var figure = el("figure", "gallery-item");
+    var media;
+    if (VIDEO_FILE.test(src)) {
+      media = el("video");
+      media.src = src;
+      media.controls = true;
+      media.playsInline = true;
+      media.preload = "metadata";
+      media.setAttribute("aria-label", caption || "Clip from " + context);
+    } else {
+      media = el("img");
+      media.src = src;
+      media.alt = caption || "Photo from " + context;
+      media.decoding = "async";
+    }
+    figure.appendChild(media);
+    if (caption) figure.appendChild(el("figcaption", null, caption));
+    return figure;
+  }
+
+  // One shared <dialog>, refilled each time a hackathon's gallery opens.
+  function getGalleryDialog() {
+    if (galleryDialog) return galleryDialog;
+    galleryDialog = el("dialog", "gallery-dialog");
+    galleryDialog.setAttribute("aria-labelledby", "gallery-title");
+    // A click on the dimmed area around the panel closes it.
+    galleryDialog.addEventListener("click", function (event) {
+      if (event.target === galleryDialog) galleryDialog.close();
+    });
+    galleryDialog.addEventListener("close", function () {
+      document.documentElement.classList.remove("modal-open");
+      galleryDialog.textContent = ""; // removing the clips also stops them playing
+    });
+    document.body.appendChild(galleryDialog);
+    return galleryDialog;
+  }
+
+  function openGallery(h, items) {
+    var dialog = getGalleryDialog();
+
+    var close = el("button", "gallery-close");
+    close.type = "button";
+    close.setAttribute("aria-label", "Close");
+    close.appendChild(createIcon(ICONS.close));
+    close.addEventListener("click", function () { dialog.close(); });
+
+    var heading = el("div");
+    var title = el("h2", "gallery-title", h.name);
+    title.id = "gallery-title";
+    heading.appendChild(title);
+    var meta = textOrNull("p", "card-meta", hackathonMeta(h));
+    if (meta) heading.appendChild(meta);
+
+    var header = el("div", "gallery-header");
+    header.appendChild(heading);
+    header.appendChild(close);
+
+    var grid = el("div", "gallery-grid");
+    items.forEach(function (item) {
+      grid.appendChild(buildGalleryItem(item, h.name));
+    });
+
+    var panel = el("div", "gallery-panel");
+    panel.appendChild(header);
+    panel.appendChild(grid);
+    var links = buildLinks(h.links, HACKATHON_LINK_LABELS, h.name);
+    if (links) panel.appendChild(links);
+
+    dialog.textContent = "";
+    dialog.appendChild(panel);
+    document.documentElement.classList.add("modal-open");
+    dialog.showModal();
+  }
+
+  function buildGalleryButton(h) {
+    var items = galleryItems(h);
+    if (!items.length || typeof HTMLDialogElement !== "function") return null;
+    var button = el("button", "gallery-button");
+    button.type = "button";
+    var icon = el("span", "gallery-button-icon");
+    icon.setAttribute("aria-hidden", "true");
+    icon.appendChild(createIcon(ICONS.play));
+    button.appendChild(icon);
+    button.appendChild(document.createTextNode("Photos & clips"));
+    button.appendChild(srOnly(" from " + h.name));
+    button.addEventListener("click", function () { openGallery(h, items); });
+    return button;
+  }
+
+  // "Watch demo" button that opens links.video; hidden while that link is empty.
+  function buildDemoButton(h) {
+    var a = createLink(h.links && h.links.video, "Watch demo", h.name);
+    if (!a) return null;
+    a.className = "button";
+    var icon = createIcon(ICONS.play);
+    icon.classList.add("button-icon");
+    a.insertBefore(icon, a.firstChild);
+    return a;
+  }
+
+  // The demo and gallery buttons sit side by side in one row.
+  function buildActions(h) {
+    var buttons = [buildDemoButton(h), buildGalleryButton(h)].filter(Boolean);
+    if (!buttons.length) return null;
+    var row = el("div", "card-actions");
+    buttons.forEach(function (button) { row.appendChild(button); });
+    return row;
+  }
+
   function buildHackathon(h) {
-    var meta = [h.organiser, h.date].filter(hasValue).join(" · ");
+    var meta = hackathonMeta(h);
 
     var badge = null;
     if (hasValue(h.result)) {
@@ -267,6 +403,7 @@
       textOrNull("p", "card-text", h.built),
       role,
       buildTags(h.tech),
+      buildActions(h),
       buildLinks(h.links, HACKATHON_LINK_LABELS, h.name)
     ]);
   }

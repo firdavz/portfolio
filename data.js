@@ -18,7 +18,7 @@
 window.PORTFOLIO = {
   /* ---------- Left column / header ---------- */
   name: "Firdavs Olimjanov",
-  headline: "Fintech Developer",
+  headline: "Junior Fintech Developer",
   tagline: "I understand the customer,\nthe money, and the code.", // \n = new line
   cvUrl: "assets/cv/cv.pdf", // put your CV file at this path
 
@@ -26,7 +26,6 @@ window.PORTFOLIO = {
   socials: {
     github: "https://github.com/firdavz",
     linkedin: "https://www.linkedin.com/in/firdavs10/",
-    email: "mailto:olimjanovf2@gmail.com",
   },
 
   /* ---------- About ---------- */
@@ -39,36 +38,57 @@ window.PORTFOLIO = {
 
   /* ---------- Hackathons ---------- */
   hackathons: [
-    // TODO: EXAMPLE ENTRY — replace every value with your real hackathon.
     {
       name: "First Running Hackathon",
       organiser: "TAG",
       date: "29/09/2026",
       result: "Best 4th project , 2nd by running distance", // highlighted badge; "" to hide
-      built: "Lectra :  Live agent that helps students to turn their lecture speechs into visual  diagrams (using Marmeid).",
-      tech: ["Python , Node.js , LLM , Marmeid , CSS , HTML"],
+      built: "Lectra: an AI agent that listens to a lecture and turns it into an interactive mind-map in real time. Google Gemini picks out the key concepts, and D3.js draws them as a visual diagram.",
+      tech: ["Python", "JavaScript", "CSS", "HTML"],
       links: {
+        // TODO: paste the demo video link here (YouTube or Loom). A "Watch demo" button appears once it's filled in.
+        video: "",
         github: "https://github.com/Renanlvrt/No-excuse-to-not-go-to-lectures-anymore",
         devpost: "", // optional Devpost project page — empty, so it's hidden
-        video: "", // YouTube / Loom link — empty, so it's hidden
       },
       image: "", // e.g. "assets/images/hackathon-team.jpg"
       imageAlt: "", // describe the photo, e.g. "Our team presenting on stage"
+      // Photos & short clips shown in a pop-up by the "Photos & clips" button.
+      // Leave the list empty [] to hide the button. Clips should be short .mp4 files.
+      gallery: [
+        // { src: "assets/images/lectra-team.jpg", caption: "Our team at the start line" },
+        // { src: "assets/videos/lectra-demo.mp4", caption: "Lectra turning a lecture into a diagram" },
+      ],
+    },
+    {
+      name: "Ylookup Hackathon",
+      organiser: "ylookup.ai",
+      date: "", // TODO: add the date, e.g. "06/09/2026"
+      result: "Top 5 project", // highlighted badge; "" to hide
+      built: "A tool for fund administrators that turns bank statement PDFs into journal entries. It matches every transaction, flags mistakes, and sends unsure rows to a human review queue.",
+      tech: ["Python", "TypeScript", "HTML", "CSS"],
+      links: {
+        video: "", // TODO: demo video link (YouTube or Loom) — adds a "Watch demo" button
+        github: "https://github.com/firdavz/ylookup-hackathon",
+        devpost: "",
+      },
+      image: "",
+      imageAlt: "",
+      gallery: [],
     },
   ],
 
   /* ---------- Projects ---------- */
   projects: [
-    // TODO: EXAMPLE ENTRY — replace every value with your real project.
     {
-      title: "TODO: Project title",
-      summary: "TODO: One-line summary of the project.",
-      description: "TODO: A few sentences on what it does, how you built it, and what you learned.",
-      tech: ["TODO", "Tech", "Tags"],
+      title: "Joyla",
+      summary: "An AI-powered CRM for businesses.",
+      description: "Joyla will help businesses manage their customers and use AI to show what those customers need. Currently in development.",
+      tech: [], // TODO: add the tech stack, e.g. ["TypeScript", "Next.js", "PostgreSQL"]
       metrics: "", // e.g. a user count or other real result — "" to hide
       links: {
-        github: "#TODO",
-        live: "",
+        github: "", // TODO: repo link, if it's public
+        live: "", // TODO: website link
         video: "",
       },
       image: "", // e.g. "assets/images/project-screenshot.png"
