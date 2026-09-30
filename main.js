@@ -122,8 +122,7 @@
     email: "Email"
   };
 
-  // links.video isn't listed here: it becomes the "Watch demo" button instead.
-  var HACKATHON_LINK_LABELS = { github: "GitHub", devpost: "Devpost" };
+  var HACKATHON_LINK_LABELS = { video: "Watch demo", github: "GitHub", devpost: "Devpost" };
   var PROJECT_LINK_LABELS = { github: "GitHub", live: "Live demo", video: "Video" };
 
   /* ---------- Shared card pieces ---------- */
@@ -359,23 +358,11 @@
     return button;
   }
 
-  // "Watch demo" button that opens links.video; hidden while that link is empty.
-  function buildDemoButton(h) {
-    var a = createLink(h.links && h.links.video, "Watch demo", h.name);
-    if (!a) return null;
-    a.className = "button";
-    var icon = createIcon(ICONS.play);
-    icon.classList.add("button-icon");
-    a.insertBefore(icon, a.firstChild);
-    return a;
-  }
-
-  // The demo and gallery buttons sit side by side in one row.
   function buildActions(h) {
-    var buttons = [buildDemoButton(h), buildGalleryButton(h)].filter(Boolean);
-    if (!buttons.length) return null;
+    var button = buildGalleryButton(h);
+    if (!button) return null;
     var row = el("div", "card-actions");
-    buttons.forEach(function (button) { row.appendChild(button); });
+    row.appendChild(button);
     return row;
   }
 

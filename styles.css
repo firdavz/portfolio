@@ -474,7 +474,7 @@ main {
   line-height: 1.6;
 }
 
-/* Row holding a hackathon's "Watch demo" and "Photos & clips" buttons. */
+/* Row holding a hackathon's "Photos & clips" button. */
 .card-actions {
   display: flex;
   flex-wrap: wrap;

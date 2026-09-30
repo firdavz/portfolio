@@ -67,7 +67,7 @@ window.PORTFOLIO = {
       built: "A tool for fund administrators that turns bank statement PDFs into journal entries. It matches every transaction, flags mistakes, and sends unsure rows to a human review queue.",
       tech: ["Python", "TypeScript", "HTML", "CSS"],
       links: {
-        video: "", // TODO: demo video link (YouTube or Loom) — adds a "Watch demo" button
+        video: "", // TODO: demo video link (YouTube or Loom) — adds a "Watch demo" link next to GitHub
         github: "https://github.com/firdavz/ylookup-hackathon",
         devpost: "",
       },
