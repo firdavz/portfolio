@@ -152,18 +152,26 @@
     return list;
   }
 
+  function listItem(child) {
+    var li = el("li");
+    li.appendChild(child);
+    return li;
+  }
+
+  function linkArrow() {
+    var arrow = el("span", "link-arrow", "↗");
+    arrow.setAttribute("aria-hidden", "true");
+    return arrow;
+  }
+
   function buildLinks(links, labels, context) {
     if (!links) return null;
     var list = el("ul", "card-links");
     Object.keys(labels).forEach(function (key) {
       var a = createLink(links[key], labels[key], context);
       if (!a) return;
-      var arrow = el("span", "link-arrow", "↗");
-      arrow.setAttribute("aria-hidden", "true");
-      a.appendChild(arrow);
-      var li = el("li");
-      li.appendChild(a);
-      list.appendChild(li);
+      a.appendChild(linkArrow());
+      list.appendChild(listItem(a));
     });
     return list.children.length ? list : null;
   }
@@ -347,14 +355,10 @@
   function buildGalleryButton(h) {
     var items = galleryItems(h);
     if (!items.length || typeof HTMLDialogElement !== "function") return null;
-    var button = el("button", "gallery-button");
+    var button = el("button", "gallery-button", "Photos & clips");
     button.type = "button";
-    var icon = el("span", "gallery-button-icon");
-    icon.setAttribute("aria-hidden", "true");
-    icon.appendChild(createIcon(ICONS.play));
-    button.appendChild(icon);
-    button.appendChild(document.createTextNode("Photos & clips"));
     button.appendChild(srOnly(" from " + h.name));
+    button.appendChild(linkArrow());
     button.addEventListener("click", function () { openGallery(h, items); });
     return button;
   }
@@ -370,24 +374,14 @@
     return a;
   }
 
-  // The demo button leads the row of GitHub / Devpost links.
-  function buildHackathonLinks(h) {
+  // One row: the demo button, then GitHub / Devpost / album links, then the
+  // "Photos & clips" button (left out inside the pop-up it opens).
+  function buildHackathonLinks(h, galleryButton) {
     var list = buildLinks(h.links, HACKATHON_LINK_LABELS, h.name) || el("ul", "card-links");
     var demo = buildDemoButton(h);
-    if (demo) {
-      var li = el("li");
-      li.appendChild(demo);
-      list.insertBefore(li, list.firstChild);
-    }
+    if (demo) list.insertBefore(listItem(demo), list.firstChild);
+    if (galleryButton) list.appendChild(listItem(galleryButton));
     return list.children.length ? list : null;
-  }
-
-  function buildActions(h) {
-    var button = buildGalleryButton(h);
-    if (!button) return null;
-    var row = el("div", "card-actions");
-    row.appendChild(button);
-    return row;
   }
 
   function buildHackathon(h) {
@@ -414,8 +408,7 @@
       textOrNull("p", "card-text", h.built),
       role,
       buildTags(h.tech),
-      buildActions(h),
-      buildHackathonLinks(h)
+      buildHackathonLinks(h, buildGalleryButton(h))
     ]);
   }
 
