@@ -474,14 +474,6 @@ main {
   line-height: 1.6;
 }
 
-/* Row holding a hackathon's "Photos & clips" button. */
-.card-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.75rem;
-}
-
 .card-links {
   display: flex;
   flex-wrap: wrap;
@@ -509,9 +501,10 @@ main {
 
 /* A hackathon's "Watch demo" button, shrunk to the size of the links beside it. */
 .card-links .button {
-  gap: 0.4rem;
-  padding: 0.2rem 0.6rem;
-  font-size: inherit;
+  gap: 0.3rem;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
 }
 
 .card-links .button:hover {
@@ -525,65 +518,24 @@ main {
 /* ============================================================
    Hackathon gallery — "Photos & clips" button and pop-up
    ============================================================ */
+/* Styled to match the GitHub link beside it. */
 .gallery-button {
-  justify-self: start;
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.3rem 0.95rem 0.3rem 0.3rem;
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
+  gap: 0.3rem;
+  padding: 0;
+  border: 0;
   background: none;
   color: var(--color-text);
   font: inherit;
-  font-size: 0.875rem;
-  font-weight: 600;
   cursor: pointer;
-  transition: border-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
 }
 
 .gallery-button:hover {
-  border-color: var(--color-accent);
   color: var(--color-accent);
-  box-shadow: 0 0 18px -6px var(--color-accent-glow);
-}
-
-.gallery-button-icon {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: 50%;
-  background: var(--color-accent);
-  color: var(--color-accent-ink);
-}
-
-.gallery-button-icon svg {
-  width: 0.75rem;
-  height: 0.75rem;
-  margin-left: 2px; /* a triangle looks centred when nudged right */
-}
-
-/* A ring that keeps pulsing outwards so the button looks "live". */
-.gallery-button-icon::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 2px solid var(--color-accent);
-  border-radius: 50%;
-  animation: gallery-pulse 2s ease-out infinite;
-}
-
-@keyframes gallery-pulse {
-  from {
-    opacity: 0.8;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(1.9);
-  }
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-underline-offset: 3px;
 }
 
 .gallery-dialog {
