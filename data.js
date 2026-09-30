@@ -46,8 +46,7 @@ window.PORTFOLIO = {
       built: "Lectra: an AI agent that listens to a lecture and turns it into an interactive mind-map in real time. Google Gemini picks out the key concepts, and D3.js draws them as a visual diagram.",
       tech: ["Python", "JavaScript", "CSS", "HTML"],
       links: {
-        // TODO: paste the demo video link here (YouTube or Loom). A "Watch demo" button appears once it's filled in.
-        video: "",
+        video: "https://loom.com/share/1c318f1e1c1e4af2a60e91d9b3901b1c",
         github: "https://github.com/firdavz/lectra",
         devpost: "", // optional Devpost project page — empty, so it's hidden
       },
