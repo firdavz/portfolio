@@ -58,6 +58,7 @@ window.PORTFOLIO = {
       gallery: [
         { src: "assets/images/running-hackathon-2.jpg" },
         { src: "assets/images/running-hackathon-3.jpg" },
+        { src: "assets/images/running-hackathon-4.jpg" },
       ],
     },
     {
