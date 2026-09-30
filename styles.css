@@ -485,6 +485,7 @@ main {
 .card-links {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.5rem 1.25rem;
   font-size: 0.875rem;
   font-weight: 600;
@@ -504,6 +505,17 @@ main {
 
 .link-arrow {
   color: var(--color-accent);
+}
+
+/* A hackathon's "Watch demo" button, shrunk to the size of the links beside it. */
+.card-links .button {
+  gap: 0.4rem;
+  padding: 0.2rem 0.6rem;
+  font-size: inherit;
+}
+
+.card-links .button:hover {
+  text-decoration: none;
 }
 
 .empty-note {

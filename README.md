@@ -57,9 +57,10 @@ Everything you see on the page comes from `data.js`. Rules:
   role: "What you personally did.",
   tech: ["Python", "FastAPI", "React"],
   links: {
-    video: "https://youtu.be/...",          // YouTube or Loom link; shows a "Watch demo" link
+    video: "https://youtu.be/...",          // YouTube or Loom link; shows a "Watch demo" button
     github: "https://github.com/you/repo",
     devpost: "https://devpost.com/software/your-project",
+    photos: "https://www.icloud.com/sharedalbum/...", // shared album link; shows a "Photo album" link
   },
   image: "assets/images/hackathon-name.jpg", // "" for no photo
   imageAlt: "Our team presenting the demo on stage",

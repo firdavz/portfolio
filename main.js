@@ -122,7 +122,8 @@
     email: "Email"
   };
 
-  var HACKATHON_LINK_LABELS = { video: "Watch demo", github: "GitHub", devpost: "Devpost" };
+  // links.video isn't listed here: it becomes the "Watch demo" button instead.
+  var HACKATHON_LINK_LABELS = { github: "GitHub", devpost: "Devpost", photos: "Photo album" };
   var PROJECT_LINK_LABELS = { github: "GitHub", live: "Live demo", video: "Video" };
 
   /* ---------- Shared card pieces ---------- */
@@ -334,7 +335,7 @@
     var panel = el("div", "gallery-panel");
     panel.appendChild(header);
     panel.appendChild(grid);
-    var links = buildLinks(h.links, HACKATHON_LINK_LABELS, h.name);
+    var links = buildHackathonLinks(h);
     if (links) panel.appendChild(links);
 
     dialog.textContent = "";
@@ -356,6 +357,29 @@
     button.appendChild(srOnly(" from " + h.name));
     button.addEventListener("click", function () { openGallery(h, items); });
     return button;
+  }
+
+  // "Watch demo" button that opens links.video; hidden while that link is empty.
+  function buildDemoButton(h) {
+    var a = createLink(h.links && h.links.video, "Watch demo", h.name);
+    if (!a) return null;
+    a.className = "button";
+    var icon = createIcon(ICONS.play);
+    icon.classList.add("button-icon");
+    a.insertBefore(icon, a.firstChild);
+    return a;
+  }
+
+  // The demo button leads the row of GitHub / Devpost links.
+  function buildHackathonLinks(h) {
+    var list = buildLinks(h.links, HACKATHON_LINK_LABELS, h.name) || el("ul", "card-links");
+    var demo = buildDemoButton(h);
+    if (demo) {
+      var li = el("li");
+      li.appendChild(demo);
+      list.insertBefore(li, list.firstChild);
+    }
+    return list.children.length ? list : null;
   }
 
   function buildActions(h) {
@@ -391,7 +415,7 @@
       role,
       buildTags(h.tech),
       buildActions(h),
-      buildLinks(h.links, HACKATHON_LINK_LABELS, h.name)
+      buildHackathonLinks(h)
     ]);
   }
 

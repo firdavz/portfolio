@@ -49,14 +49,14 @@ window.PORTFOLIO = {
         video: "https://loom.com/share/1c318f1e1c1e4af2a60e91d9b3901b1c",
         github: "https://github.com/firdavz/lectra",
         devpost: "", // optional Devpost project page — empty, so it's hidden
+        photos: "", // optional link to a shared photo album (iCloud / Google Photos)
       },
       image: "", // e.g. "assets/images/hackathon-team.jpg"
       imageAlt: "", // describe the photo, e.g. "Our team presenting on stage"
       // Photos & short clips shown in a pop-up by the "Photos & clips" button.
       // Leave the list empty [] to hide the button. Clips should be short .mp4 files.
       gallery: [
-        // { src: "assets/images/lectra-team.jpg", caption: "Our team at the start line" },
-        // { src: "assets/videos/lectra-demo.mp4", caption: "Lectra turning a lecture into a diagram" },
+        { src: "assets/images/running-hackathon-1.jpg", caption: "Teams at work in the hackathon room" },
       ],
     },
     {
@@ -67,9 +67,10 @@ window.PORTFOLIO = {
       built: "A tool for fund administrators that turns bank statement PDFs into journal entries. It matches every transaction, flags mistakes, and sends unsure rows to a human review queue.",
       tech: ["Python", "TypeScript", "HTML", "CSS"],
       links: {
-        video: "", // TODO: demo video link (YouTube or Loom) — adds a "Watch demo" link next to GitHub
+        video: "", // TODO: demo video link (YouTube or Loom) — adds a "Watch demo" button next to GitHub
         github: "https://github.com/firdavz/ylookup-hackathon",
         devpost: "",
+        photos: "",
       },
       image: "",
       imageAlt: "",
