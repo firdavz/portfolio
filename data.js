@@ -46,7 +46,7 @@ window.PORTFOLIO = {
       built: "Lectra: an AI agent that listens to a lecture and turns it into an interactive mind-map in real time. ElevenLabs Scribe transcribes the speech live, Google Gemini picks out the key concepts, and Cytoscape.js draws them as a visual diagram.",
       tech: ["Python", "JavaScript", "CSS", "HTML"],
       links: {
-        video: "https://loom.com/share/1c318f1e1c1e4af2a60e91d9b3901b1c",
+        video: "https://www.loom.com/share/1989f4ce5ee14f45b426835adbdb85a3",
         github: "https://github.com/firdavz/lectra",
         devpost: "", // optional Devpost project page — empty, so it's hidden
         photos: "", // optional link to a shared photo album (iCloud / Google Photos)
