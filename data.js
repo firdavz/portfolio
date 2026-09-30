@@ -43,7 +43,7 @@ window.PORTFOLIO = {
       organiser: "TAG",
       date: "29/09/2026",
       result: "Best 4th project , 2nd by running distance", // highlighted badge; "" to hide
-      built: "Lectra: an AI agent that listens to a lecture and turns it into an interactive mind-map in real time. Google Gemini picks out the key concepts, and D3.js draws them as a visual diagram.",
+      built: "Lectra: an AI agent that listens to a lecture and turns it into an interactive mind-map in real time. ElevenLabs Scribe transcribes the speech live, Google Gemini picks out the key concepts, and Cytoscape.js draws them as a visual diagram.",
       tech: ["Python", "JavaScript", "CSS", "HTML"],
       links: {
         video: "https://loom.com/share/1c318f1e1c1e4af2a60e91d9b3901b1c",
