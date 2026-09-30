@@ -48,7 +48,7 @@ window.PORTFOLIO = {
       links: {
         // TODO: paste the demo video link here (YouTube or Loom). A "Watch demo" button appears once it's filled in.
         video: "",
-        github: "https://github.com/Renanlvrt/No-excuse-to-not-go-to-lectures-anymore",
+        github: "https://github.com/firdavz/lectra",
         devpost: "", // optional Devpost project page — empty, so it's hidden
       },
       image: "", // e.g. "assets/images/hackathon-team.jpg"
