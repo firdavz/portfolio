@@ -56,6 +56,8 @@ window.PORTFOLIO = {
       // Photos & short clips shown in a pop-up by the "Photos & clips" button.
       // Leave the list empty [] to hide the button. Clips should be short .mp4 files.
       gallery: [
+        { src: "assets/images/running-hackathon-2.jpg", caption: "On the track at London Stadium" },
+        { src: "assets/images/running-hackathon-3.jpg", caption: "Presenting Lectra on the track" },
         { src: "assets/images/running-hackathon-1.jpg", caption: "Teams at work in the hackathon room" },
       ],
     },
