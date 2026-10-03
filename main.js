@@ -254,8 +254,18 @@
     var container = document.getElementById("about-body");
     if (!container || !hasValue(data.about)) return;
     data.about.forEach(function (paragraph) {
-      if (hasValue(paragraph)) container.appendChild(el("p", null, paragraph));
+      if (hasValue(paragraph)) container.appendChild(buildParagraph(paragraph));
     });
+  }
+
+  // Text wrapped in **double asterisks** becomes <strong> (shown in white).
+  function buildParagraph(text) {
+    var p = el("p");
+    text.split(/\*\*(.+?)\*\*/).forEach(function (part, i) {
+      if (!part) return;
+      p.appendChild(i % 2 ? el("strong", null, part) : document.createTextNode(part));
+    });
+    return p;
   }
 
   function hackathonMeta(h) {
@@ -415,6 +425,7 @@
   function buildProject(p) {
     return buildCard(buildMedia(p, "Screenshot of " + p.title), [
       el("h3", "card-title", p.title),
+      textOrNull("p", "badge", p.stage),
       textOrNull("p", "card-summary", p.summary),
       textOrNull("p", "card-text", p.description),
       textOrNull("p", "metrics", p.metrics),

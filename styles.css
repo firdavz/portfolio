@@ -358,6 +358,11 @@ main {
   margin-top: 1.1rem;
 }
 
+.about-text strong {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
 /* ============================================================
    Cards (hackathons + projects)
    ============================================================ */

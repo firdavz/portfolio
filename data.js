@@ -20,7 +20,7 @@ window.PORTFOLIO = {
   name: "Firdavs Olimjanov",
   headline: "Junior Fintech Developer",
   tagline: "I understand the customer,\nthe money, and the code.", // \n = new line
-  cvUrl: "assets/cv/cv.pdf", // put your CV file at this path
+  cvUrl: "", // hidden for now — set back to "assets/cv/cv.pdf" to show the Download CV button
 
   // Social icons. Leave a value as "" to hide that icon.
   socials: {
@@ -30,9 +30,11 @@ window.PORTFOLIO = {
 
   /* ---------- About ---------- */
   // Each string is one paragraph. Add or remove strings freely.
+  // Wrap words in **double asterisks** to highlight them in white.
   about: [
-    "I'm a second-year Finance student at the University of Greenwich who fell in love with fintech. I've always been fascinated by the big fintech products and how they turned banking, payments and investing into something people actually enjoy using. I believe fintech is where the future of money is being built, and I want to be one of the people building it.",
-    "What drives me is where finance meets code: solving problems to build products that meet a real customer need. I taught myself to code from scratch, and since then I've built projects I'm proud of and won hackathons along the way, all while achieving top results in economics and finance and earning a university scholarship. Right now I'm building Joyla, a CRM for businesses in Central Asia that helps them manage their customers and gives AI-powered insights into what those customers need.",
+    "I'm a second-year Finance student at the University of Greenwich who is passionate about fintech. I've always been fascinated by the big fintech products and how they turned banking, payments and investing into something people actually enjoy using. I believe fintech is where the future of money is being built, and I want to be one of the people building it.",
+    "What drives me is where finance meets code: solving problems to build products that meet a real customer need. I taught myself to code from scratch, and since then I've built projects I'm proud of and won hackathons along the way, all while achieving top results in economics and finance and earning a university scholarship.",
+    "I co-founded **NoBrand Education**, an English learning centre in Namangan, Uzbekistan, and grew it to 600+ students in 8 months, mainly through Instagram and social media marketing. Currently I'm building **Joyla**, an AI-powered CRM that gives businesses feedback on their customers, helps them analyze problems and opportunities, and offers advice for areas like marketing and accounting.",
     "In my spare time, you'll usually find me playing football, spending time with the people I love, or sitting somewhere beautiful for far longer than I planned.",
   ],
 
@@ -85,11 +87,12 @@ window.PORTFOLIO = {
     {
       title: "Joyla",
       summary: "An AI-powered CRM for businesses.",
-      description: "Joyla will help businesses manage their customers and use AI to show what those customers need. Currently in development.",
+      stage: "Stealth", // shown as a badge — "" to hide
+      description: "Joyla gives businesses AI-powered feedback on their customers, helps them analyze problems and opportunities, and offers advice for areas like marketing and accounting.",
       tech: [], // TODO: add the tech stack, e.g. ["TypeScript", "Next.js", "PostgreSQL"]
       metrics: "", // e.g. a user count or other real result — "" to hide
       links: {
-        github: "", // TODO: repo link, if it's public
+        github: "", // left empty on purpose while in stealth
         live: "", // TODO: website link
         video: "",
       },
@@ -99,5 +102,5 @@ window.PORTFOLIO = {
   ],
 
   /* ---------- Footer ---------- */
-  footer: "Designed and built by Firdavs with plain HTML, CSS and JavaScript.",
+  footer: "Designed & built by Firdavs Olimjanov",
 };
