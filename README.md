@@ -73,6 +73,21 @@ Everything you see on the page comes from `data.js`. Rules:
 
 `gallery` fills the pop-up that opens from the card's **Photos & clips** button. Each entry is a photo or a clip: files ending in `.mp4`, `.webm` or `.mov` play as videos, everything else shows as a picture. The caption is optional.
 
+### Add a job (Experience)
+
+Same steps, in the `experience: [` list. Newest job goes first:
+
+```js
+{
+  dates: "2025 — Present",
+  role: "Founder",
+  company: "Company name",
+  url: "https://company.com",               // makes the title a link; "" leaves it plain
+  description: "What you did there, in one or two sentences.",
+  tech: ["Python", "Excel"],                // tools you actually used in this job; [] hides the tags
+},
+```
+
 ### Add a project
 
 Same steps, in the `projects: [` list:
@@ -99,6 +114,7 @@ Same steps, in the `projects: [` list:
 - **Name, headline, tagline**: top of `data.js`.
 - **Social links**: `socials` in `data.js`. Email must start with `mailto:`, e.g. `mailto:me@example.com`. Set one to `""` to hide its icon.
 - **About**: `about` in `data.js`. Each string is one paragraph.
+- **Footer**: `footer` in `data.js`. In the About text and the footer, wrap words in `**double asterisks**` to highlight them in white.
 
 ## Images
 
