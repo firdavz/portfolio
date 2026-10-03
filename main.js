@@ -434,9 +434,27 @@
     ]);
   }
 
+  // "Role · Company" title (a link when x.url is set), dates in the left column.
+  function buildExperience(x) {
+    var titleText = [x.role, x.company].filter(hasValue).join(" · ");
+    var title = el("h3", "card-title");
+    var link = createLink(x.url, titleText);
+    if (link) {
+      link.appendChild(linkArrow());
+      title.appendChild(link);
+    } else {
+      title.textContent = titleText;
+    }
+    return buildCard(textOrNull("p", "card-date", x.dates), [
+      title,
+      textOrNull("p", "card-text", x.description),
+      buildTags(x.tech)
+    ]);
+  }
+
   function renderFooter() {
-    var footer = document.getElementById("footer-text");
-    if (footer) footer.textContent = data.footer || "";
+    var footer = document.getElementById("site-footer");
+    if (footer && hasValue(data.footer)) footer.appendChild(buildParagraph(data.footer));
   }
 
   /* ---------- Active nav link on scroll ---------- */
@@ -537,6 +555,7 @@
   renderIntro();
   renderSocials();
   renderAbout();
+  fillList("experience-list", data.experience, buildExperience, "Experience coming soon.");
   fillList("hackathon-list", data.hackathons, buildHackathon, "Hackathons coming soon.");
   fillList("project-list", data.projects, buildProject, "Projects coming soon.");
   renderFooter();

@@ -392,7 +392,7 @@ main {
   }
 }
 
-/* Cards with a thumbnail get two columns on wider screens. */
+/* Cards with a thumbnail (or an experience date) get two columns on wider screens. */
 @media (min-width: 600px) {
   .card.has-media {
     grid-template-columns: 9rem minmax(0, 1fr);
@@ -423,6 +423,24 @@ main {
 .card-title {
   font-size: 1.15rem;
   font-weight: 700;
+}
+
+.card-title a {
+  text-decoration: none;
+}
+
+.card-title .link-arrow {
+  margin-left: 0.3em;
+  font-size: 0.85em;
+}
+
+/* Experience dates, e.g. "2025 — PRESENT". */
+.card-date {
+  padding-top: 0.3rem; /* lines up with the title beside it */
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .card-summary {
@@ -669,7 +687,13 @@ main {
 .site-footer {
   padding-top: 2rem;
   border-top: 1px solid var(--color-border);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.site-footer strong {
+  color: var(--color-text);
+  font-weight: 500;
 }
 
 .noscript {
