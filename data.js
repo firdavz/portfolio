@@ -50,11 +50,11 @@ window.PORTFOLIO = {
     },
     {
       dates: "2024 — 2025",
-      role: "Dispatcher", // TODO: check the title
-      company: "Amazon",
+      role: "Senior Load Sales Dispatcher",
+      company: "SDS",
       url: "",
-      description: "", // TODO: one or two sentences on what you did
-      tech: [],
+      description: "Generated $100K+ in weekly revenue by matching drivers with high-quality loads.",
+      tech: ["Amazon Relay", "Excel", "DAT", "ELD"],
     },
   ],
 
