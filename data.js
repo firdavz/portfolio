@@ -33,8 +33,7 @@ window.PORTFOLIO = {
   // Wrap words in **double asterisks** to highlight them in white.
   about: [
     "I'm a second-year Finance student at the University of Greenwich who is passionate about fintech. I've always been fascinated by the big fintech products and how they turned banking, payments and investing into something people actually enjoy using. I believe fintech is where the future of money is being built, and I want to be one of the people building it.",
-    "What drives me is where finance meets code: solving problems to build products that meet a real customer need. I taught myself to code from scratch, and since then I've built projects I'm proud of and won hackathons along the way, all while achieving top results in economics and finance and earning a university scholarship.",
-    "I co-founded **NoBrand Education**, an English learning centre in Namangan, Uzbekistan, and grew it to 600+ students in 8 months, mainly through Instagram and social media marketing. Currently I'm building **Joyla**, an AI-powered CRM that gives businesses feedback on their customers, helps them analyze problems and opportunities, and offers advice for areas like marketing and accounting.",
+    "I'm the Co-Founder of **NoBrand Education**, an English learning centre in Uzbekistan that we grew to 600+ students in 8 months, mainly through Instagram and social media marketing. Currently I'm building **Joyla**, an AI-powered CRM that gives businesses feedback on their customers, helps them analyze problems and opportunities, and offers advice for areas like marketing and accounting.",
     "In my spare time, you'll usually find me playing football, spending time with the people I love, or sitting somewhere beautiful for far longer than I planned.",
   ],
 
