@@ -50,7 +50,7 @@ window.PORTFOLIO = {
     },
     {
       dates: "Jun 2024 — Aug 2025",
-      role: "Senior Amazon Load Sales Dispatcher",
+      role: "Amazon Dispatcher",
       company: "SDS",
       url: "",
       description: "Generated $100K+ in weekly revenue by matching drivers with high-quality loads.",
