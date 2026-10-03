@@ -41,27 +41,19 @@ window.PORTFOLIO = {
   // Newest first. "url" turns the title into a link; "" leaves it plain.
   experience: [
     {
-      dates: "", // TODO: e.g. "2026 — Present"
-      role: "Founder", // TODO: check the title
-      company: "Joyla",
-      url: "",
-      description: "Building an AI-powered CRM that gives businesses feedback on their customers, helps them analyze problems and opportunities, and offers advice for areas like marketing and accounting.",
+      dates: "Nov 2025 — Present",
+      role: "Co-Founder",
+      company: "NoBrand Education",
+      url: "https://nobrandedu.uz/",
+      description: "Co-founded an English learning centre in Uzbekistan and grew it to 600+ students in 8 months, mainly through Instagram and social media marketing.",
       tech: [],
     },
     {
-      dates: "", // TODO: e.g. "2025 — 2026"
+      dates: "2024 — 2025",
       role: "Dispatcher", // TODO: check the title
       company: "Amazon",
       url: "",
       description: "", // TODO: one or two sentences on what you did
-      tech: [],
-    },
-    {
-      dates: "", // TODO: e.g. "2023 — 2024"
-      role: "Co-Founder",
-      company: "NoBrand Education",
-      url: "",
-      description: "Co-founded an English learning centre in Uzbekistan and grew it to 600+ students in 8 months, mainly through Instagram and social media marketing.",
       tech: [],
     },
   ],
@@ -131,5 +123,5 @@ window.PORTFOLIO = {
 
   /* ---------- Footer ---------- */
   // Wrap words in **double asterisks** to highlight them in white.
-  footer: "Coded in **Visual Studio Code** by yours truly. Built with plain **HTML**, **CSS** and **JavaScript**, with no frameworks or build tools. All text is set in the **Inter** and **Plus Jakarta Sans** typefaces.",
+  footer: "Designed & built by Firdavs Olimjanov",
 };

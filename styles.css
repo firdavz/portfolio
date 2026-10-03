@@ -397,6 +397,11 @@ main {
   .card.has-media {
     grid-template-columns: 9rem minmax(0, 1fr);
   }
+
+  /* A little wider for experience dates, so "Nov 2025 — Present" fits on one line. */
+  .card.has-media:has(> .card-date) {
+    grid-template-columns: 10rem minmax(0, 1fr);
+  }
 }
 
 .card-media img {
@@ -687,8 +692,7 @@ main {
 .site-footer {
   padding-top: 2rem;
   border-top: 1px solid var(--color-border);
-  font-size: 0.875rem;
-  line-height: 1.7;
+  font-size: 0.8rem;
 }
 
 .site-footer strong {
