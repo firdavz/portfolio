@@ -49,7 +49,7 @@ window.PORTFOLIO = {
       tech: [],
     },
     {
-      dates: "2024 — 2025",
+      dates: "Jun 2024 — Aug 2025",
       role: "Senior Load Sales Dispatcher",
       company: "SDS",
       url: "",
