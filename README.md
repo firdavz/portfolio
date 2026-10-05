@@ -167,3 +167,7 @@ To update the site later: edit, then `git add . && git commit -m "Update" && git
 ### Optional: replace the preview image
 
 `assets/images/og-image.png` is a simple generated card with your name. Replace it with any **1200 × 630** PNG or JPG using the same filename.
+
+
+### This comments are being made to check git working status nothin new just a test for git 
+
