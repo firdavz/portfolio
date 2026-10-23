@@ -57,6 +57,34 @@ html.modal-open {
   overflow: hidden;
 }
 
+/* Scrollbar in the theme colours: slim, navy track, muted violet thumb.
+   Chrome, Edge and Safari use the ::-webkit rules; Firefox uses scrollbar-color. */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  border: 2px solid var(--color-bg);
+  border-radius: 999px;
+  background: var(--color-border-hover);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-hover) var(--color-bg);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
