@@ -41,20 +41,20 @@ window.PORTFOLIO = {
   // Newest first. "url" turns the title into a link; "" leaves it plain.
   experience: [
     {
-      dates: "Nov 2025 — Present",
-      role: "Co-Founder",
-      company: "NoBrand Education",
-      url: "https://nobrandedu.uz/",
-      description: "Co-founded an English learning centre in Uzbekistan and grew it to 600+ students in 8 months, mainly through Instagram and social media marketing.",
-      tech: [],
-    },
-    {
       dates: "Jun 2024 — Aug 2025",
       role: "Amazon Dispatcher",
       company: "SDS",
       url: "",
       description: "Generated $100K+ in weekly revenue by matching drivers with high-quality loads. Managed load assignments and tracked drivers in real time on Amazon Relay. Built KPI dashboards and financial trackers in Excel, and analysed data to optimise costs and improve dispatch efficiency.",
       tech: ["Amazon Relay", "Excel", "DAT", "ELD"],
+    },
+    {
+      dates: "Nov 2025 — Present",
+      role: "Co-Founder",
+      company: "NoBrand Education",
+      url: "https://nobrandedu.uz/",
+      description: "Co-founded an English learning centre in Uzbekistan and grew it to 600+ students in 8 months, mainly through Instagram and social media marketing.",
+      tech: [],
     },
   ],
 
