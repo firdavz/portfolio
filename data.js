@@ -84,6 +84,24 @@ window.PORTFOLIO = {
       ],
     },
     {
+      name: "Grok Bot Community Engineering Hackathon",
+      organiser: "Cursor · Hackradar · The Hack Collective",
+      date: "22/10/2026",
+      result: "", // TODO: add the result if you placed, e.g. "Top 5 finalist"
+      built: "Commons: personal AI agents that introduce community members to each other. Each member's agent talks to the others, finds common ground and proposes an introduction, and nothing happens until both people approve. Built in one evening (6–11 PM) at Expedite London HQ for Track 2, Know Your Members, with live per-agent calls to Grok and a network view of the agents talking.",
+      tech: ["Next.js", "React", "TypeScript", "React Flow"],
+      links: {
+        video: "https://github.com/Adkid-Zephyr/commons-a2a/blob/main/media/commons-a2a-film.mp4",
+        github: "https://github.com/Adkid-Zephyr/commons-a2a",
+        live: "https://commons-a2a-london.laufs0310.chatgpt.site/", // optional live site — empty to hide
+        devpost: "",
+        photos: "",
+      },
+      image: "",
+      imageAlt: "",
+      gallery: [],
+    },
+    {
       name: "Ylookup Hackathon",
       organiser: "ylookup.ai",
       date: "", // TODO: add the date, e.g. "06/09/2026"

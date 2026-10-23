@@ -123,7 +123,7 @@
   };
 
   // links.video isn't listed here: it becomes the "Watch demo" button instead.
-  var HACKATHON_LINK_LABELS = { github: "GitHub", devpost: "Devpost", photos: "Photo album" };
+  var HACKATHON_LINK_LABELS = { github: "GitHub", live: "Live site", devpost: "Devpost", photos: "Photo album" };
   var PROJECT_LINK_LABELS = { github: "GitHub", live: "Live demo", video: "Video" };
 
   /* ---------- Shared card pieces ---------- */
