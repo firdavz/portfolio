@@ -87,7 +87,7 @@ window.PORTFOLIO = {
       name: "Grok Bot Community Engineering Hackathon",
       organiser: "Cursor · Hackradar · The Hack Collective",
       date: "22/10/2026",
-      result: "", // TODO: add the result if you placed, e.g. "Top 5 finalist"
+      result: "", // no placement, so the badge is hidden
       built: "Commons: personal AI agents that introduce community members to each other. Each member's agent talks to the others, finds common ground and proposes an introduction, and nothing happens until both people approve. Built in one evening (6–11 PM) at Expedite London HQ for Track 2, Know Your Members, with live per-agent calls to Grok and a network view of the agents talking.",
       tech: ["Next.js", "React", "TypeScript", "React Flow"],
       links: {
