@@ -161,8 +161,9 @@
     canvas.height = Math.round(h * dpr);
 
     var wide = w >= 1024; // matches the sidebar breakpoint in styles.css
-    cx = w * (wide ? 0.6 : 0.5);
-    cy = h * (wide ? 0.5 : 0.36);
+    // On wide screens the core sits in the gap between the sidebar and the content.
+    cx = w * (wide ? 0.47 : 0.5);
+    cy = h * (wide ? 0.56 : 0.36);
     R = Math.min(w * (w < 768 ? 0.62 : 0.42), h * 0.62);
     iconSize = Math.max(16, Math.min(30, R / 17));
     build();
@@ -232,7 +233,7 @@
     ctx.lineCap = "round";
     for (var c = 0; c < PALETTE.length; c++) {
       for (b = 0; b < BUCKETS; b++) {
-        ctx.strokeStyle = rgba(PALETTE[c], 0.08 + b * 0.13);
+        ctx.strokeStyle = rgba(PALETTE[c], 0.06 + b * 0.1);
         ctx.stroke(dustPaths[c * BUCKETS + b]);
       }
     }
@@ -275,14 +276,14 @@
       var k = (iconSize / 24) * sp.s * (1 + ic.flash * 0.25);
       var glowSize = iconSize * 3.2 * sp.s;
 
-      ctx.globalAlpha = (0.16 + ic.flash * 0.45) * depth;
+      ctx.globalAlpha = (0.24 + ic.flash * 0.45) * depth;
       ctx.drawImage(ic.glow, sp.x - glowSize / 2, sp.y - glowSize / 2, glowSize, glowSize);
 
       var tilt = Math.sin(ic.spin) * 0.35;
       var cos = Math.cos(tilt) * k * dpr;
       var sin = Math.sin(tilt) * k * dpr;
       ctx.setTransform(cos, sin, -sin, cos, sp.x * dpr - (cos * 12 - sin * 12), sp.y * dpr - (sin * 12 + cos * 12));
-      ctx.globalAlpha = (0.45 + ic.flash * 0.5) * depth;
+      ctx.globalAlpha = Math.min(1, (0.7 + ic.flash * 0.5) * depth);
       ctx.strokeStyle = rgba(ic.flash > 0.05 ? WHITE : ic.color, 1);
       ctx.lineWidth = 1.5;
       ctx.lineJoin = "round";
