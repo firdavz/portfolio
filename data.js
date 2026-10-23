@@ -91,7 +91,7 @@ window.PORTFOLIO = {
       built: "Commons: personal AI agents that introduce community members to each other. Each member's agent talks to the others, finds common ground and proposes an introduction, and nothing happens until both people approve. Built in one evening (6–11 PM) at Expedite London HQ for Track 2, Know Your Members, with live per-agent calls to Grok and a network view of the agents talking.",
       tech: ["Next.js", "React", "TypeScript", "React Flow"],
       links: {
-        video: "https://github.com/Adkid-Zephyr/commons-a2a/blob/main/media/commons-a2a-film.mp4",
+        video: "assets/videos/commons-film.mp4", // stored in the site, so it plays in a pop-up
         github: "https://github.com/Adkid-Zephyr/commons-a2a",
         live: "https://commons-a2a-london.laufs0310.chatgpt.site/", // optional live site — empty to hide
         devpost: "",
