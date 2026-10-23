@@ -92,6 +92,15 @@
     "M4 8h15l-3-3 M20 16H5l3 3"
   ].map(function (d) { return new Path2D(d); });
 
+  // Real fintech brands, drawn filled in their own colours (marks from Simple Icons, 24×24).
+  var BRANDS = [
+    { color: [255, 255, 255], d: "M20.9133 6.9566C20.9133 3.1208 17.7898 0 13.9503 0H2.424v3.8605h10.9782c1.7376 0 3.177 1.3651 3.2087 3.043.016.84-.2994 1.633-.8878 2.2324-.5886.5998-1.375.9303-2.2144.9303H9.2322a.2756.2756 0 0 0-.2755.2752v3.431c0 .0585.018.1142.052.1612L16.2646 24h5.3114l-7.2727-10.094c3.6625-.1838 6.61-3.2612 6.61-6.9494zM6.8943 5.9229H2.424V24h4.4704z" }, // Revolut
+    { color: [255, 79, 64], d: "M4.244 1.174a.443.443 0 00-.271.13l-3.97 3.97-.001.001c3.884 3.882 8.093 8.092 11.748 11.748v-8.57L4.602 1.305a.443.443 0 00-.358-.131zm15.483 0a.443.443 0 00-.329.13L12.25 8.456v8.568L24 5.275c-1.316-1.322-2.647-2.648-3.97-3.97a.443.443 0 00-.301-.131zM0 5.979l.002 10.955c0 .294.118.577.326.785l4.973 4.976c.28.282.76.083.758-.314V12.037zm23.998.003l-6.06 6.061v10.338c-.004.399.48.6.76.314l4.974-4.976c.208-.208.326-.49.326-.785z" }, // Monzo
+    { color: [159, 232, 112], d: "M6.488 7.469 0 15.05h11.585l1.301-3.576H7.922l3.033-3.507.01-.092L8.993 4.48h8.873l-6.878 18.925h4.706L24 .595H2.543l3.945 6.874Z" } // Wise
+  ].map(function (b) {
+    return { path: new Path2D(b.d), color: b.color, glow: makeGlow(b.color, 64, 0.2) };
+  });
+
   var CURRENCIES = ["£", "$", "€", "₿"];
 
   /* ---------- Scene ---------- */
@@ -133,17 +142,22 @@
     }
 
     var iconCount = w < 768 ? 11 : 18;
+    // Brands are spread evenly through the orbit; generic icons fill the rest.
+    var brandEvery = Math.floor(iconCount / BRANDS.length);
+    var generic = 0;
     icons = [];
     for (var j = 0; j < iconCount; j++) {
+      var brand = (j % brandEvery === 0 && BRANDS[j / brandEvery]) || null;
       icons.push({
-        path: ICON_PATHS[j % ICON_PATHS.length],
+        path: brand ? brand.path : ICON_PATHS[generic++ % ICON_PATHS.length],
+        brand: !!brand,
         r: 0.42 + (j / iconCount) * 0.6 + Math.random() * 0.06,
         a: j * 2.399, // golden angle, so icons never bunch up
         y: gaussian() * 0.05,
         spin: Math.random() * TAU,
         spinSpeed: (Math.random() - 0.5) * 0.25,
-        color: j % 3 === 1 ? CYAN : VIOLET,
-        glow: j % 3 === 1 ? GLOW.cyan : GLOW.violet,
+        color: brand ? brand.color : (j % 3 === 1 ? CYAN : VIOLET),
+        glow: brand ? brand.glow : (j % 3 === 1 ? GLOW.cyan : GLOW.violet),
         flash: 0,
         screen: { x: 0, y: 0, s: 1, z: 0 }
       });
@@ -273,7 +287,7 @@
       if ((sp.z > 0) !== behind) continue;
 
       var depth = Math.max(0.15, Math.min(1, 0.7 - sp.z * 0.6));
-      var k = (iconSize / 24) * sp.s * (1 + ic.flash * 0.25);
+      var k = (iconSize / 24) * sp.s * (1 + ic.flash * 0.25) * (ic.brand ? 1.55 : 1);
       var glowSize = iconSize * 3.2 * sp.s;
 
       ctx.globalAlpha = (0.24 + ic.flash * 0.45) * depth;
@@ -284,11 +298,16 @@
       var sin = Math.sin(tilt) * k * dpr;
       ctx.setTransform(cos, sin, -sin, cos, sp.x * dpr - (cos * 12 - sin * 12), sp.y * dpr - (sin * 12 + cos * 12));
       ctx.globalAlpha = Math.min(1, (0.7 + ic.flash * 0.5) * depth);
-      ctx.strokeStyle = rgba(ic.flash > 0.05 ? WHITE : ic.color, 1);
-      ctx.lineWidth = 1.5;
-      ctx.lineJoin = "round";
-      ctx.lineCap = "round";
-      ctx.stroke(ic.path);
+      if (ic.brand) {
+        ctx.fillStyle = rgba(ic.color, 1);
+        ctx.fill(ic.path);
+      } else {
+        ctx.strokeStyle = rgba(ic.flash > 0.05 ? WHITE : ic.color, 1);
+        ctx.lineWidth = 1.5;
+        ctx.lineJoin = "round";
+        ctx.lineCap = "round";
+        ctx.stroke(ic.path);
+      }
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
     ctx.globalAlpha = 1;
@@ -369,7 +388,7 @@
     for (i = 0; i < dust.length; i++) dust[i].a += angularSpeed(dust[i].r) * dt * speed;
     for (i = 0; i < icons.length; i++) {
       var ic = icons[i];
-      ic.a += angularSpeed(ic.r) * 0.55 * dt * speed;
+      ic.a += angularSpeed(ic.r) * 0.9 * dt * speed;
       ic.spin += ic.spinSpeed * dt;
       ic.flash *= Math.pow(0.15, dt);
     }
