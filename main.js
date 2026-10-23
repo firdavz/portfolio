@@ -325,9 +325,8 @@
     return galleryDialog;
   }
 
-  function openGallery(h, items) {
-    var dialog = getGalleryDialog();
-
+  // Title, organiser/date and a close button: the top of both pop-ups.
+  function buildDialogHeader(h, dialog) {
     var close = el("button", "gallery-close");
     close.type = "button";
     close.setAttribute("aria-label", "Close");
@@ -344,6 +343,18 @@
     var header = el("div", "gallery-header");
     header.appendChild(heading);
     header.appendChild(close);
+    return header;
+  }
+
+  function showDialog(dialog, panel) {
+    dialog.textContent = "";
+    dialog.appendChild(panel);
+    document.documentElement.classList.add("modal-open");
+    dialog.showModal();
+  }
+
+  function openGallery(h, items) {
+    var dialog = getGalleryDialog();
 
     var grid = el("div", "gallery-grid");
     items.forEach(function (item) {
@@ -351,15 +362,30 @@
     });
 
     var panel = el("div", "gallery-panel");
-    panel.appendChild(header);
+    panel.appendChild(buildDialogHeader(h, dialog));
     panel.appendChild(grid);
     var links = buildHackathonLinks(h);
     if (links) panel.appendChild(links);
 
-    dialog.textContent = "";
-    dialog.appendChild(panel);
-    document.documentElement.classList.add("modal-open");
-    dialog.showModal();
+    showDialog(dialog, panel);
+  }
+
+  // Plays a demo video stored with the site, big, in the same pop-up.
+  function openDemo(h, src) {
+    var dialog = getGalleryDialog();
+
+    var video = el("video", "demo-video");
+    video.src = src;
+    video.controls = true;
+    video.playsInline = true;
+    video.autoplay = true;
+    video.setAttribute("aria-label", "Demo video for " + h.name);
+
+    var panel = el("div", "gallery-panel");
+    panel.appendChild(buildDialogHeader(h, dialog));
+    panel.appendChild(video);
+
+    showDialog(dialog, panel);
   }
 
   function buildGalleryButton(h) {
@@ -373,15 +399,26 @@
     return button;
   }
 
-  // "Watch demo" button that opens links.video; hidden while that link is empty.
+  // "Watch demo" button for links.video; hidden while that link is empty.
+  // A video file in this site (e.g. "assets/videos/demo.mp4") plays in a pop-up;
+  // anything else (YouTube, Loom) opens as a link.
   function buildDemoButton(h) {
-    var a = createLink(h.links && h.links.video, "Watch demo", h.name);
-    if (!a) return null;
-    a.className = "button";
+    var src = safeUrl(h.links && h.links.video);
+    if (!src) return null;
+    var control;
+    if (VIDEO_FILE.test(src) && !isExternal(src) && typeof HTMLDialogElement === "function") {
+      control = el("button", "button", "Watch demo");
+      control.type = "button";
+      control.appendChild(srOnly(" for " + h.name));
+      control.addEventListener("click", function () { openDemo(h, src); });
+    } else {
+      control = createLink(src, "Watch demo", h.name);
+      control.className = "button";
+    }
     var icon = createIcon(ICONS.play);
     icon.classList.add("button-icon");
-    a.insertBefore(icon, a.firstChild);
-    return a;
+    control.insertBefore(icon, control.firstChild);
+    return control;
   }
 
   // One row: the demo button, then GitHub / Devpost / album links, then the
