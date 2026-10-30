@@ -18,7 +18,7 @@
 window.PORTFOLIO = {
   /* ---------- Left column / header ---------- */
   name: "Firdavs Olimjanov",
-  headline: "Junior Fintech Developer",
+  headline: "",
   tagline: "I understand the customer,\nthe money, and the code.", // \n = new line
   cvUrl: "", // hidden for now — set back to "assets/cv/cv.pdf" to show the Download CV button
 
