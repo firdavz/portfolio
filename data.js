@@ -118,23 +118,8 @@ window.PORTFOLIO = {
   ],
 
   /* ---------- Projects ---------- */
-  projects: [
-    {
-      title: "Joyla",
-      summary: "An AI-powered CRM for businesses.",
-      stage: "Stealth", // shown as a badge — "" to hide
-      description: "Joyla gives businesses AI-powered feedback on their customers, helps them analyze problems and opportunities, and offers advice for areas like marketing and accounting.",
-      tech: [], // TODO: add the tech stack, e.g. ["TypeScript", "Next.js", "PostgreSQL"]
-      metrics: "", // e.g. a user count or other real result — "" to hide
-      links: {
-        github: "", // left empty on purpose while in stealth
-        live: "", // TODO: website link
-        video: "",
-      },
-      image: "", // e.g. "assets/images/project-screenshot.png"
-      imageAlt: "",
-    },
-  ],
+  // An empty list hides the section and its sidebar link.
+  projects: [],
 
   /* ---------- Footer ---------- */
   // Wrap words in **double asterisks** to highlight them in white.

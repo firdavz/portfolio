@@ -250,15 +250,19 @@
     if (!list.children.length) list.remove();
   }
 
+  // Hides a whole section and its link in the sidebar.
+  function removeSection(id) {
+    var section = document.getElementById(id);
+    var navLink = document.querySelector('[data-nav="' + id + '"]');
+    if (section) section.remove();
+    if (navLink) navLink.closest("li").remove();
+  }
+
   function renderAbout() {
     var container = document.getElementById("about-body");
     if (!container) return;
-    // No About text: hide the whole section and its link in the sidebar.
     if (!hasValue(data.about)) {
-      var section = document.getElementById("about");
-      var navLink = document.querySelector('[data-nav="about"]');
-      if (section) section.remove();
-      if (navLink) navLink.closest("li").remove();
+      removeSection("about");
       return;
     }
     data.about.forEach(function (paragraph) {
@@ -602,7 +606,8 @@
   renderAbout();
   fillList("experience-list", data.experience, buildExperience, "Experience coming soon.");
   fillList("hackathon-list", data.hackathons, buildHackathon, "Hackathons coming soon.");
-  fillList("project-list", data.projects, buildProject, "Projects coming soon.");
+  if (hasValue(data.projects)) fillList("project-list", data.projects, buildProject, "Projects coming soon.");
+  else removeSection("projects");
   renderFooter();
   setupScrollSpy();
   setupCursorGlow();
