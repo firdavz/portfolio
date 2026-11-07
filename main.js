@@ -252,7 +252,15 @@
 
   function renderAbout() {
     var container = document.getElementById("about-body");
-    if (!container || !hasValue(data.about)) return;
+    if (!container) return;
+    // No About text: hide the whole section and its link in the sidebar.
+    if (!hasValue(data.about)) {
+      var section = document.getElementById("about");
+      var navLink = document.querySelector('[data-nav="about"]');
+      if (section) section.remove();
+      if (navLink) navLink.closest("li").remove();
+      return;
+    }
     data.about.forEach(function (paragraph) {
       if (hasValue(paragraph)) container.appendChild(buildParagraph(paragraph));
     });

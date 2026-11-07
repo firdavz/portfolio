@@ -31,11 +31,8 @@ window.PORTFOLIO = {
   /* ---------- About ---------- */
   // Each string is one paragraph. Add or remove strings freely.
   // Wrap words in **double asterisks** to highlight them in white.
-  about: [
-    "I'm a second-year Finance student at the University of Greenwich who is passionate about fintech. I've always been fascinated by the big fintech products and how they turned banking, payments and investing into something people actually enjoy using. I believe fintech is where the future of money is being built, and I want to be one of the people building it.",
-    "I'm the Co-Founder of **NoBrand Education**, an English learning centre in Uzbekistan that we grew to 600+ students in 8 months, mainly through Instagram and social media marketing. Currently I'm building **Joyla**, an AI-powered CRM that gives businesses feedback on their customers, helps them analyze problems and opportunities, and offers advice for areas like marketing and accounting.",
-    "In my spare time, you'll usually find me playing football, spending time with the people I love, or sitting somewhere beautiful for far longer than I planned.",
-  ],
+  // An empty list hides the section and its sidebar link.
+  about: [],
 
   /* ---------- Experience ---------- */
   // Newest first. "url" turns the title into a link; "" leaves it plain.
